@@ -1,0 +1,13 @@
+!SESSION 2013-03-07 17:53:07.515 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_43
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=nb_NO
+Framework arguments:  -keyring /Users/randak/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -data /Users/randak/Documents/_Projects/RiotCraft/src -keyring /Users/randak/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-03-07 17:53:13.138
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2013-03-07 17:53:13.741
+!MESSAGE No search provider was registed. Tasks search is not available.
