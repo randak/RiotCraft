@@ -1,3 +1,4 @@
+
 package com.kristianrandall.riotCraft;
 
 import java.util.ArrayList;
@@ -43,11 +44,20 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     	getLogger().info("RiotCraft has been disabled.");
     }
     
+    /**
+     * Listens for an object to be thrown, and changes the functionality of bricks, splash potions,
+     * and fire charges. 
+     * 
+     * @param event an event triggered when a player interacts with the world
+     * @since 0.1
+     */
     @EventHandler
     public void objectThrowListener(PlayerInteractEvent event) {
     	Player p = event.getPlayer();
         
-        if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+    	//if the player clicks in the air, or on a block not excluded from the list
+        if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) 
+        		&& !this.getConfig().getIntegerList("ignoreThrow").contains(event.getClickedBlock().getTypeId()))){
             if(p.getItemInHand().getType() == Material.CLAY_BRICK){
             	
 //            	if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -116,6 +126,12 @@ public final class RiotCraft extends JavaPlugin implements Listener {
         }
     }
     
+    /**
+     * Listens for a BlockIgniteEvent and stops fire charges from creating fires.
+     * 
+     * @param event an event triggered on block ignition
+     * @since 1.5
+     */
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent event) {
     	if(event.getCause().equals(IgniteCause.FIREBALL)) {
