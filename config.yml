@@ -1,6 +1,7 @@
 brick:
     velocity: 1.3
     damageDealt: 2
+    armorDamage: 7
     destroyOnImpact: true
     breakMaterials: #materials the brick will break
         - 102 #thin glass

@@ -100,15 +100,17 @@ public class BrickTimer extends BukkitRunnable {
 		  ItemStack l = ee.getLeggings();
 		  ItemStack b = ee.getBoots();
 		  
+		  int armorDamage = plugin.getConfig().getInt("brick.armorDamage");
+		  
 		  if(damageArmor) {
 			  if(h != null)
-				  h.setDurability((short) (h.getDurability() + 7));
+				  h.setDurability((short) (h.getDurability() + armorDamage));
 			  if(c != null)
-				  c.setDurability((short) (c.getDurability() + 7));
+				  c.setDurability((short) (c.getDurability() + armorDamage));
 			  if(l != null)
-				  l.setDurability((short) (l.getDurability() + 7));
+				  l.setDurability((short) (l.getDurability() + armorDamage));
 			  if(b != null)
-				  b.setDurability((short) (b.getDurability() + 7));
+				  b.setDurability((short) (b.getDurability() + armorDamage));
 		  }
 		  
 		  Material helmet = ee.getHelmet().getType();
