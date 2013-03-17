@@ -11,7 +11,7 @@ public class FireChargeTimer extends BukkitRunnable {
 	private final String action;
 	@SuppressWarnings("unused")
 	private int id;
-	private Plugin plugin;
+	private final Plugin plugin;
 	
 	public FireChargeTimer(Item item, String action) {
 		this.item = item;

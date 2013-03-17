@@ -21,7 +21,7 @@ public class BrickTimer extends BukkitRunnable {
 	private final Item item;
 	private final Player p;
 	private int id;
-	private Plugin plugin;
+	private final Plugin plugin;
 	
 	public BrickTimer(Item item, Player player) {
 		this.item = item;
