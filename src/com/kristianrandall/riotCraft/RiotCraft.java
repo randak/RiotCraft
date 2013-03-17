@@ -18,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockIgniteEvent;
+import org.bukkit.event.block.BlockIgniteEvent.IgniteCause;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.BrewEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -112,6 +114,13 @@ public final class RiotCraft extends JavaPlugin implements Listener {
             	}
             }
         }
+    }
+    
+    @EventHandler
+    public void onBlockIgnite(BlockIgniteEvent event) {
+    	if(event.getCause().equals(IgniteCause.FIREBALL)) {
+    		event.setCancelled(true);
+    	}
     }
     
     @EventHandler
