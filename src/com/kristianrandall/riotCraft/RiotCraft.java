@@ -58,7 +58,7 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     	//if the player clicks in the air, or on a block not excluded from the list
         if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) 
         		&& !this.getConfig().getIntegerList("ignoreThrow").contains(event.getClickedBlock().getTypeId()))){
-            if(p.getItemInHand().getType() == Material.CLAY_BRICK){
+            if(p.getItemInHand().getType() == Material.CLAY_BRICK && this.getConfig().getBoolean("brick.enabled")){
             	
 //            	if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 //            		Material clickedBlock = event.getClickedBlock().getType();
@@ -89,7 +89,7 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     			
     			BrickTimer bt = new BrickTimer(dropped, p);
     			bt.setID(this.getServer().getScheduler().scheduleSyncRepeatingTask(this, bt, 0L, 1L));
-            } else if(p.getItemInHand().getType() == Material.FIREBALL) { 
+            } else if(p.getItemInHand().getType() == Material.FIREBALL && this.getConfig().getBoolean("grenade.enabled")) { 
             	ItemStack item = new ItemStack(Material.FIREBALL);
             	
             	if(!p.getGameMode().equals(GameMode.CREATIVE)) {
@@ -116,7 +116,7 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     			
     			FireChargeTimer explode = new FireChargeTimer(dropped, "explode");
     			explode.setID(this.getServer().getScheduler().scheduleSyncDelayedTask(this, explode, 60L));
-            } else if(p.getItemInHand().getType() == Material.POTION) {
+            } else if(p.getItemInHand().getType() == Material.POTION && this.getConfig().getBoolean("molotov.enabled")) {
             	if(p.getItemInHand().getDurability() == 16384) {
             		
             		int pots = (this.playerPotions.containsKey(p)) ? this.playerPotions.get(p)+1 : 1;

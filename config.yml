@@ -24,6 +24,7 @@ ignoreThrow: #don't throw bricks when right-clicking on these
     #- 407 #minecart with TNT
     #- 408 #minecart with hopper
 brick:
+    enabled: true
     velocity: 1.3
     damageDealt: 2
     armorDamage: 7
@@ -32,6 +33,7 @@ brick:
         - 102 #thin glass
         - 20 #glass
 molotov:
+    enabled: true
     canBecomeFire: #materials that will be replaced with fire blocks
         - 0 #air
         - 31 #tall grass
@@ -44,5 +46,6 @@ molotov:
         - 76 #redstone torch (active)
         - 55 #redstone wire
 grenade:
+    enabled: true
     velocity: 0.9
     explosionStrength: 1.5
