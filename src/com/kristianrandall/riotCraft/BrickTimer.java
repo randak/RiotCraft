@@ -13,6 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -20,10 +21,12 @@ public class BrickTimer extends BukkitRunnable {
 	private final Item item;
 	private final Player p;
 	private int id;
+	private Plugin plugin;
 	
 	public BrickTimer(Item item, Player player) {
 		this.item = item;
 		this.p = player;
+		this.plugin = Bukkit.getServer().getPluginManager().getPlugin("RiotCraft");
 	}
 	
 	public void setID(int id) {
@@ -42,7 +45,7 @@ public class BrickTimer extends BukkitRunnable {
 		World world = p.getWorld();
 		
 		for(Block b : blocks) {
-			if(b.getTypeId() == 102 || b.getTypeId() == 20) {
+			if(plugin.getConfig().getIntegerList("brick.breakMaterials").contains(b.getTypeId())) {
 				b.breakNaturally();
 				world.playSound(item.getLocation(),Sound.GLASS,50,0);
 				item.setVelocity(new Vector(0, 0, 0));
@@ -61,9 +64,12 @@ public class BrickTimer extends BukkitRunnable {
 			}
 			
 			if(e instanceof LivingEntity) {
-				((LivingEntity)e).damage(calculateDamage((LivingEntity)e, 2, false, true), p);
+				int damage = plugin.getConfig().getInt("brick.damageDealt");
+				((LivingEntity)e).damage(calculateDamage((LivingEntity)e, damage, false, true), p);
 				
-				item.remove();
+				if(plugin.getConfig().getBoolean("brick.destroyOnImpact")) {
+					item.remove();
+				}
 				this.cancel();
 				break;
 			}
@@ -71,7 +77,9 @@ public class BrickTimer extends BukkitRunnable {
 		
 		//REMOVE the block
 		if(item.getVelocity().length() < 0.7) {
-			item.remove();
+			if(plugin.getConfig().getBoolean("brick.destroyOnImpact")) {
+				item.remove();
+			}
 			this.cancel();
 		}
 	}

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -48,6 +47,13 @@ public final class RiotCraft extends JavaPlugin implements Listener {
         
         if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
             if(p.getItemInHand().getType() == Material.CLAY_BRICK){
+            	
+//            	if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+//            		Material clickedBlock = event.getClickedBlock().getType();
+//            		
+////            		if()
+//            	}
+            	
             	//TODO MAKE SURE NOT OPENING CHEST, etc (check clicked block)
             	//if block is door, chest, workbench, furnace, potion stand, lever, button, repeater, item frame
             	
@@ -67,7 +73,7 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     			
     			Vector v = new Vector((b.getX() - loc.getX()) / 10D, (b.getY() - loc.getY()) / 10D, (b.getZ() - loc.getZ()) / 10D);
     			
-    			dropped.setVelocity(v.normalize().multiply(1.3)); //TODO make this a config option
+    			dropped.setVelocity(v.normalize().multiply(this.getConfig().getDouble("brick.velocity"))); //TODO make this a config option
     			
     			BrickTimer bt = new BrickTimer(dropped, p);
     			bt.setID(this.getServer().getScheduler().scheduleSyncRepeatingTask(this, bt, 0L, 1L));
@@ -89,33 +95,15 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     			
     			Vector v = new Vector((b.getX() - loc.getX()) / 10D, (b.getY() - loc.getY()) / 10D, (b.getZ() - loc.getZ()) / 10D);
     			
-    			dropped.setVelocity(v.normalize().multiply(0.9));
+    			dropped.setVelocity(v.normalize().multiply(this.getConfig().getDouble("grenade.velocity")));
     			
     			dropped.setPickupDelay(50000); //never pick it up
     			
     			FireChargeTimer hiss = new FireChargeTimer(dropped, "hiss");
-    			hiss.setID(this.getServer().getScheduler().scheduleSyncRepeatingTask(this, hiss, 0L, 40L));
+    			hiss.setID(this.getServer().getScheduler().scheduleSyncDelayedTask(this, hiss, 40L));
     			
     			FireChargeTimer explode = new FireChargeTimer(dropped, "explode");
-    			explode.setID(this.getServer().getScheduler().scheduleSyncRepeatingTask(this, explode, 0L, 60L));
-    			
-    			Timer t = new Timer();
-//    			
-//    			VelocityTimer hiss = new VelocityTimer(dropped, p, t) {
-//    				public void run() {
-//    					item.getWorld().playSound(item.getLocation(), Sound.CREEPER_HISS, 100, 0);
-//    				}
-//    			};
-//    			
-//    			VelocityTimer explode = new VelocityTimer(dropped, p, t) {
-//    				public void run(){
-//    					item.getWorld().createExplosion(item.getLocation(), 1.25F);
-//    					item.remove();
-//    		        }
-//    			};
-//    			
-//    			t.schedule(hiss, 2000);
-//    			t.schedule(explode, 3000);
+    			explode.setID(this.getServer().getScheduler().scheduleSyncDelayedTask(this, explode, 60L));
             } else if(p.getItemInHand().getType() == Material.POTION) {
             	if(p.getItemInHand().getDurability() == 16384) {
             		
@@ -137,20 +125,8 @@ public final class RiotCraft extends JavaPlugin implements Listener {
 				this.playerPotions.put(thrower, this.playerPotions.get(thrower) - 1); //decrement
 				
 				for(BlockFace face : BlockFace.values()) {
-					Block bf = b.getRelative(face);
-					
-					//TODO fix fire area control
-					
-					Material[] canBeFire = {Material.AIR, Material.LONG_GRASS, Material.RED_ROSE, 
-											Material.YELLOW_FLOWER, Material.TORCH, Material.REDSTONE_TORCH_OFF, 
-											Material.REDSTONE_TORCH_ON, Material.REDSTONE, Material.BROWN_MUSHROOM,
-											Material.RED_MUSHROOM, Material.SUGAR_CANE_BLOCK};
-					
-					for(Material m : canBeFire) {
-						if(bf.getType().equals(m)) {
-							b.getRelative(face).setType(Material.FIRE);
-							break;
-						}
+					if(this.getConfig().getIntegerList("molotov.canBecomeFire").contains(b.getRelative(face).getTypeId())) {
+						b.getRelative(face).setType(Material.FIRE);
 					}
 				}
 			}

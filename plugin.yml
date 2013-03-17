@@ -1,3 +1,4 @@
 name: RiotCraft
-main: riotCraft.RiotCraft
-version: 0.1
+main: com.kristianrandall.riotCraft.RiotCraft
+author: randak
+version: 0.4

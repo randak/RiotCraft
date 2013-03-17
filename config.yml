@@ -1,0 +1,22 @@
+brick:
+    velocity: 1.3
+    damageDealt: 2
+    destroyOnImpact: true
+    breakMaterials: #materials the brick will break
+        - 102 #thin glass
+        - 20 #glass
+molotov:
+    canBecomeFire: #materials that will be replaced with fire blocks
+        - 0 #air
+        - 31 #tall grass
+        - 37 #dandelion
+        - 38 #rose
+        - 39 #brown mushroom
+        - 40 #red mushroom
+        - 50 #torch
+        - 75 #redstone torch (inactive)
+        - 76 #redstone torch (active)
+        - 55 #redstone wire
+grenade:
+    velocity: 0.9
+    explosionStrength: 1.5
