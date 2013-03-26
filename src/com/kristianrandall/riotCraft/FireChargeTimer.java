@@ -9,18 +9,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class FireChargeTimer extends BukkitRunnable {
 	private final Item item;
 	private final String action;
-	@SuppressWarnings("unused")
-	private int id;
 	private final Plugin plugin;
 	
 	public FireChargeTimer(Item item, String action) {
 		this.item = item;
 		this.action = action;
 		this.plugin = Bukkit.getServer().getPluginManager().getPlugin("RiotCraft");
-	}
-	
-	public void setID(int id) {
-		this.id = id;
 	}
 	
 	public void run() {
