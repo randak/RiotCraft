@@ -9,7 +9,7 @@ ignoreThrow: #don't throw bricks when right-clicking on these
     - 107 #fence gate
     - 117 #brewing stand
     - 143 #wooden button
-    - 145 #anvil
+    #- 145 #anvil
     #- 146 #trapped chest
     #- 149 #redstone comparator (inactive)
     #- 150 #redstone comparator (active)
@@ -34,6 +34,7 @@ brick:
         - 20 #glass
 molotov:
     enabled: true
+    velocity: 1.1
     canBecomeFire: #materials that will be replaced with fire blocks
         - 0 #air
         - 31 #tall grass
