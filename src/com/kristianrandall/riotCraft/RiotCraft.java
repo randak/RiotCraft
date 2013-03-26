@@ -38,6 +38,7 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     public void onEnable(){
 		this.getServer().getPluginManager().registerEvents(this, this);
 		getLogger().info("RiotCraft has been enabled.");
+		this.saveDefaultConfig();
     }
  
     @Override
@@ -102,10 +103,10 @@ public final class RiotCraft extends JavaPlugin implements Listener {
     			
     			dropped.setPickupDelay(50000); //never pick it up
     			
-    			FireChargeTimer hiss = new FireChargeTimer(dropped, "hiss");
+    			FireChargeTimer hiss = new FireChargeTimer(dropped, "hiss", p);
     			this.getServer().getScheduler().scheduleSyncDelayedTask(this, hiss, 40L);
     			
-    			FireChargeTimer explode = new FireChargeTimer(dropped, "explode");
+    			FireChargeTimer explode = new FireChargeTimer(dropped, "explode", p);
     			this.getServer().getScheduler().scheduleSyncDelayedTask(this, explode, 60L);
             } else if(p.getItemInHand().getType() == Material.POTION && this.getConfig().getBoolean("molotov.enabled")) {
             	if(p.getItemInHand().getDurability() == 16384) {
