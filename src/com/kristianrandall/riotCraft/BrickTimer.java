@@ -113,50 +113,57 @@ public class BrickTimer extends BukkitRunnable {
 				  b.setDurability((short) (b.getDurability() + armorDamage));
 		  }
 		  
-		  Material helmet = ee.getHelmet().getType();
-		  Material chest = ee.getChestplate().getType();
-		  Material legs = ee.getLeggings().getType();
-		  Material boots = ee.getBoots().getType();
-		  
 		  int armorPoints = 0;
 		  
 		  if(!ignoreArmor) {
-			  if(helmet.equals(Material.DIAMOND_HELMET)) {
-				  armorPoints += 3;
-			  } else if(helmet.equals(Material.IRON_HELMET) || helmet.equals(Material.GOLD_HELMET) || helmet.equals(Material.CHAINMAIL_HELMET)) {
-				  armorPoints += 2;
-			  } else if(helmet.equals(Material.LEATHER_HELMET)) {
-				  armorPoints += 1;
+			  if(ee.getHelmet() != null) {
+				  Material helmet = ee.getHelmet().getType();
+				  if(helmet.equals(Material.DIAMOND_HELMET)) {
+					  armorPoints += 3;
+				  } else if(helmet.equals(Material.IRON_HELMET) || helmet.equals(Material.GOLD_HELMET) || helmet.equals(Material.CHAINMAIL_HELMET)) {
+					  armorPoints += 2;
+				  } else if(helmet.equals(Material.LEATHER_HELMET)) {
+					  armorPoints += 1;
+				  }
 			  }
 			  
-			  if(chest.equals(Material.DIAMOND_CHESTPLATE)) {
-				  armorPoints += 8;
-			  } else if(chest.equals(Material.IRON_CHESTPLATE)) {
-				  armorPoints += 6;
-			  } else if(chest.equals(Material.GOLD_CHESTPLATE) || chest.equals(Material.CHAINMAIL_CHESTPLATE)) {
-				  armorPoints += 5;
-			  } else if(chest.equals(Material.LEATHER_CHESTPLATE)) {
-				  armorPoints += 3;
+			  if(ee.getChestplate() != null) {
+				  Material chest = ee.getChestplate().getType();
+				  if(chest.equals(Material.DIAMOND_CHESTPLATE)) {
+					  armorPoints += 8;
+				  } else if(chest.equals(Material.IRON_CHESTPLATE)) {
+					  armorPoints += 6;
+				  } else if(chest.equals(Material.GOLD_CHESTPLATE) || chest.equals(Material.CHAINMAIL_CHESTPLATE)) {
+					  armorPoints += 5;
+				  } else if(chest.equals(Material.LEATHER_CHESTPLATE)) {
+					  armorPoints += 3;
+				  }
 			  }
 			  
-			  if(legs.equals(Material.DIAMOND_LEGGINGS)) {
-				  armorPoints += 6;
-			  } else if(legs.equals(Material.IRON_LEGGINGS)) {
-				  armorPoints += 5;
-			  } else if(legs.equals(Material.CHAINMAIL_LEGGINGS)) {
-				  armorPoints += 4;
-			  } else if(legs.equals(Material.GOLD_LEGGINGS)) {
-				  armorPoints += 3;
-			  } else if(legs.equals(Material.LEATHER_LEGGINGS)) {
-				  armorPoints += 2;
+			  if(ee.getLeggings() != null) {
+				  Material legs = ee.getLeggings().getType();
+				  if(legs.equals(Material.DIAMOND_LEGGINGS)) {
+					  armorPoints += 6;
+				  } else if(legs.equals(Material.IRON_LEGGINGS)) {
+					  armorPoints += 5;
+				  } else if(legs.equals(Material.CHAINMAIL_LEGGINGS)) {
+					  armorPoints += 4;
+				  } else if(legs.equals(Material.GOLD_LEGGINGS)) {
+					  armorPoints += 3;
+				  } else if(legs.equals(Material.LEATHER_LEGGINGS)) {
+					  armorPoints += 2;
+				  }
 			  }
 			  
-			  if(boots.equals(Material.DIAMOND_BOOTS)) {
-				  armorPoints += 3;
-			  } else if(boots.equals(Material.IRON_BOOTS)) {
-				  armorPoints += 2;
-			  } else if(boots.equals(Material.GOLD_BOOTS) || boots.equals(Material.LEATHER_BOOTS) || boots.equals(Material.CHAINMAIL_BOOTS)) {
-				  armorPoints += 1;
+			  if(ee.getBoots() != null) {
+				  Material boots = ee.getBoots().getType();
+				  if(boots.equals(Material.DIAMOND_BOOTS)) {
+					  armorPoints += 3;
+				  } else if(boots.equals(Material.IRON_BOOTS)) {
+					  armorPoints += 2;
+				  } else if(boots.equals(Material.GOLD_BOOTS) || boots.equals(Material.LEATHER_BOOTS) || boots.equals(Material.CHAINMAIL_BOOTS)) {
+					  armorPoints += 1;
+				  }
 			  }
 		  }
 		  
